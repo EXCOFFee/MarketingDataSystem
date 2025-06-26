@@ -1,0 +1,68 @@
+# Build results
+**/bin/
+**/obj/
+**/out/
+
+# Visual Studio
+**/.vs/
+**/*.user
+**/*.suo
+**/*.sdf
+**/*.opensdf
+**/*.vspx
+**/*.sap
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+**/logs/
+*.log
+
+# Database
+*.db
+*.sqlite
+*.db-*
+
+# Backups
+**/backups/
+**/Backup/
+
+# Reports (optional - uncomment if you want to exclude Excel files)
+# **/reportes/
+# *.xlsx
+
+# Secrets
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
+
+# Package files
+*.nupkg
+*.snupkg
+*.tgz
+
+# NuGet
+**/packages/
+**/.nuget/
+
+# Test results
+**/TestResults/
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 

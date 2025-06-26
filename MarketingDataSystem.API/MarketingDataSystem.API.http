@@ -1,0 +1,6 @@
+@MarketingDataSystem.API_HostAddress = http://localhost:5056
+
+GET {{MarketingDataSystem.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
