@@ -133,11 +133,6 @@ dotnet run
 | Visual Studio | 2022 | 2022 Community | [Visual Studio](https://visualstudio.microsoft.com/) |
 | Git | 2.30+ | Latest | [Git SCM](https://git-scm.com/) |
 
-### Recursos del Sistema:
-- **RAM**: 4GB mínimo, 8GB recomendado
-- **Espacio**: 2GB libres para desarrollo
-- **OS**: Windows 10/11, macOS, Linux
-
 ---
 
 ## Instalación Paso a Paso
