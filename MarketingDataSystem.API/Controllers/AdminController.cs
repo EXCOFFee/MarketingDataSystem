@@ -82,8 +82,17 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Crea un backup incremental de la base de datos
+        /// Crea un backup incremental de la base de datos - OPERACIÓN OPTIMIZADA
+        /// POST api/admin/backup/incremental
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Backup incremental (solo cambios desde último backup)
+        /// USO: Backups regulares diarios, mantenimiento rutinario, mayor eficiencia
+        /// TAMAÑO: Más pequeño y rápido que backup completo
+        /// TIEMPO: Proceso optimizado para ejecuciones frecuentes
+        /// DEPENDENCIA: Requiere backup completo previo como base
         /// </summary>
+        /// <param name="request">Solicitud opcional con ruta personalizada para el backup</param>
+        /// <returns>Información del backup incremental creado con ruta del archivo</returns>
         [HttpPost("backup/incremental")]
         public async Task<ActionResult<object>> CrearBackupIncremental([FromBody] BackupRequest? request = null)
         {
@@ -111,8 +120,16 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Lista todos los backups disponibles
+        /// Lista todos los backups disponibles en el sistema - INVENTARIO DE RECUPERACIÓN
+        /// GET api/admin/backup/listar
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Inventario completo de todos los backups almacenados
+        /// USO: Selección para restauración, auditoría de compliance, planificación de limpieza
+        /// INFORMACIÓN: Nombres de archivos, rutas completas, fechas implícitas
+        /// CASOS DE USO: Disaster recovery planning, compliance audits, storage management
+        /// RESPUESTA: Lista estructurada con archivos disponibles para restauración
         /// </summary>
+        /// <returns>200 OK con lista de backups disponibles, información de archivo</returns>
         [HttpGet("backup/listar")]
         public async Task<ActionResult<object>> ListarBackups()
         {
@@ -142,8 +159,18 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Limpia backups antiguos según política de retención
+        /// Limpia backups antiguos según política de retención - GESTIÓN DE ALMACENAMIENTO
+        /// DELETE api/admin/backup/limpiar?diasRetencion=30
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Eliminación automática de backups antiguos para liberar espacio
+        /// USO: Mantenimiento de storage, compliance con políticas de retención, automatización
+        /// PARÁMETROS: diasRetencion (default: 30 días) - configurable según necesidades
+        /// IMPACTO: Libera espacio en disco, mantiene solo backups recientes necesarios
+        /// AUDITORÍA: Registra qué archivos fueron eliminados para tracking
+        /// CASOS DE USO: Limpieza programada, gestión de costos de almacenamiento
         /// </summary>
+        /// <param name="diasRetencion">Número de días a mantener backups (default: 30)</param>
+        /// <returns>200 OK con número de backups eliminados y estadísticas</returns>
         [HttpDelete("backup/limpiar")]
         public async Task<ActionResult<object>> LimpiarBackupsAntiguos([FromQuery] int diasRetencion = 30)
         {
@@ -172,8 +199,18 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Envía una alerta de prueba
+        /// Envía una alerta de prueba - VERIFICACIÓN DEL SISTEMA DE NOTIFICACIONES
+        /// POST api/admin/alerta/prueba
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Prueba del sistema completo de alertas críticas
+        /// USO: Testing de configuración, verificación de canales, troubleshooting
+        /// CANALES: Email, webhook, logging - todos los canales configurados
+        /// TESTING: Valida que AlertaService funciona correctamente
+        /// CASOS DE USO: Verificación después de cambios de configuración, testing periódico
+        /// MENSAJE: Personalizable o default "Alerta de prueba"
         /// </summary>
+        /// <param name="request">Objeto con mensaje personalizado opcional para la prueba</param>
+        /// <returns>200 OK con confirmación de envío exitoso</returns>
         [HttpPost("alerta/prueba")]
         public async Task<ActionResult<object>> EnviarAlertaPrueba([FromBody] AlertaRequest request)
         {
@@ -253,8 +290,18 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Reinicia los servicios del sistema (simulado)
+        /// Reinicia servicios del sistema - OPERACIÓN CRÍTICA DE MANTENIMIENTO
+        /// POST api/admin/system/restart-services
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Reinicio controlado de servicios específicos o todos
+        /// USO: Mantenimiento programado, resolución de problemas, aplicación de cambios
+        /// SERVICIOS: ETL, Reportes, Alertas - reinicio selectivo o completo
+        /// IMPACTO: Interrupción temporal de servicios afectados (2-5 segundos)
+        /// CASOS DE USO: Después de actualizaciones, troubleshooting, mantenimiento preventivo
+        /// SIMULADO: Implementación actual simula reinicio real para demostración
         /// </summary>
+        /// <param name="request">Objeto con lista específica de servicios a reiniciar</param>
+        /// <returns>200 OK con confirmación de servicios reiniciados exitosamente</returns>
         [HttpPost("system/restart-services")]
         public async Task<ActionResult<object>> RestartServices([FromBody] RestartRequest request)
         {
@@ -284,8 +331,18 @@ namespace MarketingDataSystem.API.Controllers
         }
 
         /// <summary>
-        /// Obtiene logs del sistema (últimas entradas)
+        /// Obtiene logs del sistema para troubleshooting - DIAGNÓSTICO Y AUDITORÍA
+        /// GET api/admin/logs?limite=100
+        /// REQUIERE: Token JWT de administrador
+        /// FUNCIONALIDAD: Acceso a logs de sistema para diagnóstico y auditoría
+        /// USO: Troubleshooting, debugging, análisis de performance, compliance
+        /// INFORMACIÓN: Timestamp, nivel (INFO/WARN/ERROR), mensaje, fuente
+        /// LÍMITE: Configurable (default: 100) para controlar volumen de respuesta
+        /// CASOS DE USO: Diagnóstico de errores, análisis de patrones, auditorías de seguridad
+        /// SIMULADO: Implementación actual genera logs de demostración
         /// </summary>
+        /// <param name="limite">Número máximo de entradas de log a retornar (default: 100)</param>
+        /// <returns>200 OK con lista de logs ordenados por timestamp descendente</returns>
         [HttpGet("logs")]
         public ActionResult<object> GetSystemLogs([FromQuery] int limite = 100)
         {

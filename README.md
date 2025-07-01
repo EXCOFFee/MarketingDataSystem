@@ -1,10 +1,9 @@
 # Sistema de Centralización y Automatización de Datos de Marketing
 
-[![.NET Version](https://img.shields.io/badge/.NET-9.0-blue.svg)](https://dotnet.microsoft.com/)
-[![SQL Server](https://img.shields.io/badge/SQL_Server-2019+-orange.svg)](https://www.microsoft.com/sql-server/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
 Sistema empresarial completo para centralizar, normalizar y analizar datos de marketing provenientes de múltiples fuentes, con automatización completa de reportes y pipeline ETL.
+
+**Tecnologías principales:** .NET 9.0, SQL Server 2019+, Entity Framework Core
+**Licencia:** MIT
 
 ---
 
@@ -28,20 +27,21 @@ Sistema empresarial completo para centralizar, normalizar y analizar datos de ma
 
 ## Características Principales
 
-### Funcionalidades Implementadas y Verificadas:
+### Funcionalidades Implementadas y Verificadas
 
 - **Pipeline ETL Automático**: Ejecución diaria a las 02:00 AM con reintentos y alertas
-- **Reportes Excel Reales**: Generación automática con ClosedXML (4 hojas profesionales)
+- **Reportes Excel Profesionales**: Generación automática con ClosedXML (4 hojas profesionales)
 - **Autenticación JWT**: Sistema de seguridad completo con roles y autorización
 - **Gestión Completa**: Usuarios, clientes, productos, ventas, stock y fuentes de datos
 - **Backups Automáticos**: Sistema de respaldo programable con política de retención
 - **Sistema de Alertas**: Notificaciones críticas via webhooks (Slack, Teams, email)
-- **Health Checks**: Monitoreo en tiempo real del estado del sistema
-- **Documentación Swagger**: API completamente documentada y testeable
+- **Monitoreo de Estado**: Health checks en tiempo real del sistema
+- **Documentación API**: Swagger completamente documentado y testeable
 - **Logging Avanzado**: Serilog con rotación diaria y niveles de severidad
 - **Validaciones Estrictas**: FluentValidation con protección anti-XSS
 
-### Arquitectura Empresarial:
+### Arquitectura Empresarial
+
 - **Clean Architecture** con principios SOLID
 - **Unit of Work** y **Repository Pattern**
 - **Event-Driven Architecture** con EventBus
@@ -117,8 +117,8 @@ dotnet run
 - **Swagger UI:** http://localhost:5056/swagger/index.html
 
 **Credenciales por defecto:**
-- Usuario: `admin@marketingdata.com`
-- Contraseña: `admin123`
+- Usuario: admin@marketingdata.com
+- Contraseña: admin123
 
 ---
 
@@ -154,7 +154,7 @@ sqlcmd -S (localdb)\MSSQLLocalDB -Q "SELECT @@VERSION"
 
 ```powershell
 # Clonar repositorio
-git clone <tu-repositorio-url>
+git clone https://github.com/EXCOFFee/MarketingDataSystem
 ```
 
 ```powershell
@@ -894,15 +894,6 @@ Authorization: Bearer tu-jwt-token
 
 ## Guía Completa de Swagger UI (Interfaz Interactiva)
 
-### ¿Qué es Swagger y para qué sirve?
-
-**Swagger** es una interfaz web que te permite **probar tu API sin escribir código**. Es como tener un "laboratorio" donde puedes:
-- Ver todos los endpoints disponibles
-- Probar cada endpoint directamente desde el navegador
-- Ver ejemplos de requests y responses
-- Autenticarte y usar tokens automáticamente
-- Leer documentación de cada endpoint
-
 ### Paso 1: Iniciar el Sistema
 
 1. **Abrir terminal/PowerShell** en la carpeta del proyecto
@@ -1267,12 +1258,11 @@ dotnet test --filter "Category=Integration"
 
 ### Coverage de Testing:
 
-| Componente | Tests Unitarios | Tests Integración | Coverage |
-|------------|-----------------|-------------------|----------|
-| **Services** | 19 servicios | API endpoints | 85%+ |
-| **Controllers** | 8 controladores | Auth flows | 90%+ |
-| **Validators** | FluentValidation | Data validation | 95%+ |
-| **Mappers** | AutoMapper | DTO mapping | 100% |
+| Componente | Tests Unitarios | Tests Integración 
+|------------|-----------------|-------------------
+| **Services** | 19 servicios | API endpoints | 85%+
+| **Validators** | FluentValidation | Data validation 
+| **Mappers** | AutoMapper | DTO mapping
 
 ### Validación Manual Rápida:
 
@@ -1428,7 +1418,7 @@ az webapp deploy --resource-group myResourceGroup \
 
 ```bash
 # 1. Fork y clone
-git clone https://github.com/tu-usuario/MarketingDataSystem.git
+git clone https://github.com/EXCOFFee/MarketingDataSystem.git
 
 # 2. Crear rama feature
 git checkout -b feature/nueva-funcionalidad
@@ -1443,13 +1433,13 @@ git push origin feature/nueva-funcionalidad
 # 5. Crear Pull Request
 ```
 
-### Checklist antes del PR:
+### Checklist antes del Pull Request
 
-- [ ] Todas las pruebas pasan (`dotnet test`)
-- [ ] Código formateado (`dotnet format`)
-- [ ] Documentación actualizada
-- [ ] Migrations incluidas (si aplica)
-- [ ] Variables de config documentadas
+- Todas las pruebas pasan (dotnet test)
+- Código formateado (dotnet format)
+- Documentación actualizada
+- Migrations incluidas (si aplica)
+- Variables de config documentadas
 
 ---
 
@@ -1467,124 +1457,122 @@ git push origin feature/nueva-funcionalidad
 ### Contacto:
 - **Desarrollador**: Santiago Excofier
 - **Email**: [santiexcofier@gmail.com]
-- **GitHub**: [tu-github-usuario]
-
----
-
-## Licencia
-
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE) - ver el archivo LICENSE para más detalles.
+- **GitHub**: [EXCOFFee]
 
 ---
 
 ## Estado del Proyecto
 
-###ANÁLISIS DE CUMPLIMIENTO 
-### CUMPLIMIENTO DE REQUISITOS DEL SRS: 100%
-### Requisitos Funcionales - TODOS CUMPLIDOS:
-RF01 - Importación diaria automática:COMPLETO (ETL Scheduler a las 02:00 AM)
-RF02 - Múltiples fuentes heterogéneas: COMPLETO (APIs, CSV, Excel, BD locales)
-RF03 - Validación de registros: COMPLETO (Servicio validador con FluentValidation)
-RF04 - Corrección automática: COMPLETO (Transformador + normalización)
-RF05 - Enriquecimiento productos: COMPLETO (APIs externas para datos faltantes)
-RF06 - Eliminación duplicados: COMPLETO (Servicio deduplicador)
-RF07 - Almacenamiento centralizado: COMPLETO (SQL Server + EF Core)
-RF08 - Reportes Excel automáticos: COMPLETO (ClosedXML, 4 hojas profesionales)
-RF09 - Arquitectura basada en eventos: COMPLETO (EventBus + CargaFinalizada)
-###Requisitos No Funcionales - TODOS CUMPLIDOS:
-RNF01 - Disponibilidad 24/7: COMPLETO (HostedService + reintentos)
-RNF02 - Confiabilidad datos: COMPLETO (Validaciones + control errores)
-RNF03 - Escalabilidad: COMPLETO (Arquitectura modular + Clean Architecture)
-RNF04 - Rendimiento: COMPLETO (Ventana nocturna optimizada)
-RNF05 - Mantenibilidad: COMPLETO (Principios SOLID + documentación)
-RNF06 - Seguridad: COMPLETO (JWT + HTTPS + cifrado)
-RNF07 - Auditabilidad: COMPLETO (Serilog + logs estructurados)
-RNF08 - Portabilidad: COMPLETO (.NET Core + configuración externa)
-RNF09 - Usabilidad: COMPLETO (Swagger UI + acceso fácil)
-RNF10 - Consistencia referencial: COMPLETO (EF Core + claves foráneas)
-###CUMPLIMIENTO DE ARQUITECTURA C4: 100%
-###Contexto C4:
-Actores externos identificados correctamente
-Sistemas externos y internos mapeados
-Flujo de datos completo
-###Contenedores C4:
-7 contenedores bien definidos (Web API, ETL, Job Scheduler, etc.)
-Tecnologías específicas documentadas
-Responsabilidades claras
-###Componentes C4:
-ETL detallado con todos sus componentes
-Web API con controladores específicos
-Patrones de diseño implementados
- ###CUMPLIMIENTO DE DoD (Definition of Done): 100%
-Modelado y migraciones: Entity Framework + migraciones automáticas
-Lógica ETL: Pipeline completo con 19 servicios implementados
-Enriquecimiento: API externa para productos faltantes
-Persistencia: Transacciones EF Core + integridad referencial
-Scheduler + EventBus: HostedService + EventBus interno
-Reportes Excel: ClosedXML + 4 hojas profesionales
-API REST: 40+ endpoints + Swagger + JWT
-Pruebas: >80% cobertura + tests integración
-Documentación: SRS completo + README extenso + Swagger
-Despliegue: Build exitoso + logs rotativos + backups
-Revisión Final: Sistema 100% funcional
-###CUMPLIMIENTO DE DIAGRAMAS UML: 100%
-###Diagrama de Clases:
-Interfaces y implementaciones concretas
-Patrones Repository, Unit of Work
-Inyección de dependencias
-Separación de responsabilidades
-###Diagrama de Actividades:
-Flujo completo ETL desde inicio hasta reporte
-Manejo de errores y reintentos
-Decisiones y bifurcaciones correctas
-Estados finales definidos
-###CUMPLIMIENTO TECNOLÓGICO:
-###Tecnologías Sugeridas vs Implementadas:
-ASP.NET Core Web API - Implementado con .NET 9.0
-Entity Framework Core - Versión 9.0.6
-HostedService - ETL Scheduler automático
-Serilog - Logs estructurados y rotativos
-ClosedXML - Reportes Excel profesionales
-HTTPClient - Consumo APIs externas
-EventBus - Arquitectura basada en eventos
-SQL Server - Base de datos relacional
-Tecnologías Adicionales (VALOR AGREGADO):
-JWT Bearer Authentication - Seguridad avanzada
-Swagger/OpenAPI - Documentación interactiva
-FluentValidation - Validaciones declarativas
-AutoMapper - Mapeo objeto-objeto
-Health Checks - Monitoreo en tiempo real
-BCrypt - Hash seguro de contraseñas
-ASPECTOS QUE SUPERAN LAS EXPECTATIVAS:
-Cobertura de Testing: Cumple
-Documentación: README
-Seguridad: JWT + autorización por roles (no requerido)
-Monitoreo: Health checks + alertas (valor agregado)
-Funcionalidades Admin: Backups + logs + sistema status
-Performance: Optimizaciones y caching implementado
-Mantenibilidad: Clean Architecture + principios SOLID
-###CUMPLIMIENTO DE PATRONES Y PRINCIPIOS:
-###Principios SOLID:
-S - Single Responsibility: Cada servicio tiene una responsabilidad
-O - Open/Closed: Extensible sin modificar código existente
-L - Liskov Substitution: Interfaces correctamente implementadas
-I - Interface Segregation: Interfaces específicas y cohesivas
-D - Dependency Inversion: Inyección de dependencias en toda la aplicación
-### Patrones de Diseño:
-Repository Pattern - Acceso a datos
-Unit of Work - Transacciones coordinadas
-Observer Pattern - EventBus para eventos
-Strategy Pattern - Diferentes validadores y transformadores
-Factory Pattern - Creación de servicios ETL
+### Análisis de Cumplimiento
 
-### CUMPLIMIENTO DE ENTREGAS:
- Primer Parcial (100%):
-SRS completo y detallado
-Diagramas UML (clases + actividades)
-Arquitectura C4 (contexto + contenedores + componentes)
-Persistencia ORM con Entity Framework
- Segundo Parcial (100%):
-Documentación actualizada
-Principios SOLID aplicados
-API REST completa con 40+ endpoints
-Sistema basado en eventos implementado
+**CUMPLIMIENTO DE REQUISITOS DEL SRS: 100%**
+
+### Requisitos Funcionales - Todos Cumplidos
+
+- RF01 - Importación diaria automática: COMPLETO (ETL Scheduler a las 02:00 AM)
+- RF02 - Múltiples fuentes heterogéneas: COMPLETO (APIs, CSV, Excel, BD locales)
+- RF03 - Validación de registros: COMPLETO (Servicio validador con FluentValidation)
+- RF04 - Corrección automática: COMPLETO (Transformador + normalización)
+- RF05 - Enriquecimiento productos: COMPLETO (APIs externas para datos faltantes)
+- RF06 - Eliminación duplicados: COMPLETO (Servicio deduplicador)
+- RF07 - Almacenamiento centralizado: COMPLETO (SQL Server + EF Core)
+- RF08 - Reportes Excel automáticos: COMPLETO (ClosedXML, 4 hojas profesionales)
+- RF09 - Arquitectura basada en eventos: COMPLETO (EventBus + CargaFinalizada)
+
+### Requisitos No Funcionales - Todos Cumplidos
+
+- RNF01 - Disponibilidad 24/7: COMPLETO (HostedService + reintentos)
+- RNF02 - Confiabilidad datos: COMPLETO (Validaciones + control errores)
+- RNF03 - Escalabilidad: COMPLETO (Arquitectura modular + Clean Architecture)
+- RNF04 - Rendimiento: COMPLETO (Ventana nocturna optimizada)
+- RNF05 - Mantenibilidad: COMPLETO (Principios SOLID + documentación)
+- RNF06 - Seguridad: COMPLETO (JWT + HTTPS + cifrado)
+- RNF07 - Auditabilidad: COMPLETO (Serilog + logs estructurados)
+- RNF08 - Portabilidad: COMPLETO (.NET Core + configuración externa)
+- RNF09 - Usabilidad: COMPLETO (Swagger UI + acceso fácil)
+- RNF10 - Consistencia referencial: COMPLETO (EF Core + claves foráneas)
+### Cumplimiento de Arquitectura C4: 100%
+
+**Contexto C4:**
+- Actores externos identificados correctamente
+- Sistemas externos y internos mapeados
+- Flujo de datos completo
+
+**Contenedores C4:**
+- 7 contenedores bien definidos (Web API, ETL, Job Scheduler, etc.)
+- Tecnologías específicas documentadas
+- Responsabilidades claras
+
+**Componentes C4:**
+- ETL detallado con todos sus componentes
+- Web API con controladores específicos
+- Patrones de diseño implementados
+### Cumplimiento de DoD (Definition of Done): 100%
+
+- Modelado y migraciones: Entity Framework + migraciones automáticas
+- Lógica ETL: Pipeline completo con 19 servicios implementados
+- Enriquecimiento: API externa para productos faltantes
+- Persistencia: Transacciones EF Core + integridad referencial
+- Scheduler + EventBus: HostedService + EventBus interno
+- Reportes Excel: ClosedXML + 4 hojas profesionales
+- API REST: 40+ endpoints + Swagger + JWT
+- Pruebas: >80% cobertura + tests integración
+- Documentación: SRS completo + README extenso + Swagger
+- Despliegue: Build exitoso + logs rotativos + backups
+- Revisión Final: Sistema 100% funcional
+### Cumplimiento de Diagramas UML: 100%
+
+**Diagrama de Clases:**
+- Interfaces y implementaciones concretas
+- Patrones Repository, Unit of Work
+- Inyección de dependencias
+- Separación de responsabilidades
+
+**Diagrama de Actividades:**
+- Flujo completo ETL desde inicio hasta reporte
+- Manejo de errores y reintentos
+- Decisiones y bifurcaciones correctas
+- Estados finales definidos
+### Cumplimiento Tecnológico
+
+**Tecnologías Sugeridas vs Implementadas:**
+- ASP.NET Core Web API - Implementado con .NET 9.0
+- Entity Framework Core - Versión 9.0.6
+- HostedService - ETL Scheduler automático
+- Serilog - Logs estructurados y rotativos
+- ClosedXML - Reportes Excel profesionales
+- HTTPClient - Consumo APIs externas
+- EventBus - Arquitectura basada en eventos
+- SQL Server - Base de datos relacional
+
+**Tecnologías Adicionales (Valor Agregado):**
+- JWT Bearer Authentication - Seguridad avanzada
+- Swagger/OpenAPI - Documentación interactiva
+- FluentValidation - Validaciones declarativas
+- AutoMapper - Mapeo objeto-objeto
+- Health Checks - Monitoreo en tiempo real
+- BCrypt - Hash seguro de contraseñas
+### Aspectos que Superan las Expectativas
+
+- Cobertura de Testing: Cumple y supera expectativas
+- Documentación: README completo y detallado
+- Seguridad: JWT + autorización por roles (no requerido originalmente)
+- Monitoreo: Health checks + alertas (valor agregado)
+- Funcionalidades Admin: Backups + logs + sistema status
+- Performance: Optimizaciones y caching implementado
+- Mantenibilidad: Clean Architecture + principios SOLID
+### Cumplimiento de Patrones y Principios
+
+**Principios SOLID:**
+- S - Single Responsibility: Cada servicio tiene una responsabilidad
+- O - Open/Closed: Extensible sin modificar código existente
+- L - Liskov Substitution: Interfaces correctamente implementadas
+- I - Interface Segregation: Interfaces específicas y cohesivas
+- D - Dependency Inversion: Inyección de dependencias en toda la aplicación
+
+**Patrones de Diseño:**
+- Repository Pattern - Acceso a datos
+- Unit of Work - Transacciones coordinadas
+- Observer Pattern - EventBus para eventos
+- Strategy Pattern - Diferentes validadores y transformadores
+- Factory Pattern - Creación de servicios ETL

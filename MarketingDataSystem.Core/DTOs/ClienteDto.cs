@@ -40,6 +40,9 @@ namespace MarketingDataSystem.Core.DTOs
         /// COMUNICACIÓN: Usado para envío de reportes, notificaciones
         /// </summary>
         public string Email { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
+        public string Direccion { get; set; } = string.Empty;
 
         // ========== NOTAS DE DISEÑO ==========
         // DELIBERADAMENTE OMITIDO: Propiedades navegacionales (Ventas)

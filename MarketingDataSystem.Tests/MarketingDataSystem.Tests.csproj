@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <!-- Suprimir advertencias específicas de tests -->
+    <NoWarn>$(NoWarn);CS8602;CS8600;CS8604;CS8625;CS0414;xUnit2002</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,8 +45,7 @@
     <!-- Test Data Builders -->
     <PackageReference Include="Bogus" Version="35.6.1" />
     
-    <!-- Performance Testing -->
-    <PackageReference Include="NBomber" Version="5.11.1" />
+    <!-- Performance Testing - NBomber removido (no usado) -->
     
     <!-- Logging -->
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />

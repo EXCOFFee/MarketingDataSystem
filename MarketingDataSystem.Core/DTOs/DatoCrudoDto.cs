@@ -12,6 +12,7 @@ namespace MarketingDataSystem.Core.DTOs
         public string NombreFuente { get; set; } = string.Empty; // Nombre de la fuente de datos (opcional)
         public int IdDatoCrudo { get; set; } // Identificador alternativo (puede coincidir con Id)
         public DateTime Timestamp { get; set; } // Marca temporal del dato
+        public string Origen { get; set; } = string.Empty; // Origen del dato crudo
         // Puedes agregar más propiedades según el dominio
     }
 } 

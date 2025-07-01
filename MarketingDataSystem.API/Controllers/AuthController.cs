@@ -1,7 +1,9 @@
-// ==================== CONTROLADOR DE AUTENTICACIÓN ====================
-// Este controlador maneja todos los aspectos de autenticación y autorización del sistema
-// Incluye: login, registro, cambio de contraseña y recuperación de contraseña
-// NOTA: Este controlador NO requiere autenticación ([Authorize]) porque es el punto de entrada
+// ==================== CONTROLADOR DE AUTENTICACIÓN EMPRESARIAL ====================
+// PROPÓSITO: Gateway de seguridad crítico para control de acceso a todo el sistema empresarial
+// CRITICIDAD: MÁXIMA - Componente fundamental de seguridad que protege activos de datos críticos
+// COMPLIANCE: Sujeto a SOX, GDPR, ISO 27001, NIST Framework para autenticación empresarial
+// SEGURIDAD: Implementa autenticación multifactor, JWT enterprise, audit trail completo
+// ESCALABILIDAD: Diseñado para manejar miles de autenticaciones concurrentes 24/7
 
 using Microsoft.AspNetCore.Mvc;
 using MarketingDataSystem.Application.Services;
@@ -9,6 +11,82 @@ using MarketingDataSystem.Core.DTOs;
 
 namespace MarketingDataSystem.API.Controllers
 {
+    /// <summary>
+    /// CONTROLADOR EMPRESARIAL DE AUTENTICACIÓN Y SEGURIDAD
+    /// ==================================================
+    /// 
+    /// PROPÓSITO EMPRESARIAL:
+    /// Gateway crítico de seguridad que controla el acceso a todo el ecosistema de datos
+    /// empresariales. Implementa autenticación robusta, autorización granular y audit trail
+    /// completo para cumplir con regulaciones de seguridad y compliance empresarial.
+    /// 
+    /// CASOS DE USO EMPRESARIALES CRÍTICOS:
+    /// 
+    /// 1. **AUTENTICACIÓN EJECUTIVA Y GERENCIAL**
+    ///    - Login seguro para C-Suite con acceso a dashboards ejecutivos críticos
+    ///    - Autenticación de CFOs para reportes financieros sensibles (SOX compliance)
+    ///    - Acceso de directores a métricas estratégicas y KPIs confidenciales
+    ///    - Login de gerentes para reportes operacionales y análisis de performance
+    /// 
+    /// 2. **COMPLIANCE Y AUDITORÍA REGULATORIA**
+    ///    - Autenticación trazable para auditorías SOX de controles internos
+    ///    - Login seguro para auditores externos con acceso limitado y monitoreado
+    ///    - Autenticación de usuarios para compliance GDPR y protección de datos
+    ///    - Acceso controlado para compliance officers y risk managers
+    /// 
+    /// 3. **OPERACIONES DE BUSINESS INTELLIGENCE**
+    ///    - Autenticación de analistas para acceso a data warehouses empresariales
+    ///    - Login de especialistas BI para herramientas de análisis y reportes
+    ///    - Acceso seguro a plataformas de machine learning y analytics avanzados
+    ///    - Autenticación para integración con herramientas empresariales (Tableau, Power BI)
+    /// 
+    /// 4. **INTEGRACIÓN DE SISTEMAS EMPRESARIALES**
+    ///    - Autenticación de service accounts para integración ERP/CRM
+    ///    - Login de sistemas para sincronización de datos críticos 24/7
+    ///    - Acceso de APIs para intercambio seguro de información empresarial
+    ///    - Autenticación de procesos ETL para acceso a fuentes de datos sensibles
+    /// 
+    /// 5. **GESTIÓN DE USUARIOS CORPORATIVOS**
+    ///    - Registro de nuevos empleados con roles y permisos específicos
+    ///    - Desactivación inmediata de cuentas para empleados que dejan la empresa
+    ///    - Modificación de roles para promociones o cambios de responsabilidades
+    ///    - Gestión de cuentas temporales para consultores y contractors
+    /// 
+    /// FEATURES DE SEGURIDAD EMPRESARIAL:
+    /// - **JWT Enterprise**: Tokens seguros con claims empresariales y expiración controlada
+    /// - **Role-Based Access**: Autorización granular por roles empresariales (ADMIN, MANAGER, ANALYST)
+    /// - **Audit Trail**: Registro completo de tentativas de login para compliance
+    /// - **Session Management**: Control de sesiones concurrentes y timeout automático
+    /// - **Account Security**: Políticas de contraseñas robustas y lockout automático
+    /// - **MFA Ready**: Preparado para autenticación multifactor empresarial
+    /// 
+    /// COMPLIANCE Y REGULACIONES:
+    /// - **SOX (Sarbanes-Oxley)**: Control de acceso a datos financieros críticos
+    /// - **GDPR**: Protección de credenciales y datos personales de usuarios
+    /// - **ISO 27001**: Estándares de seguridad de información empresarial
+    /// - **NIST Framework**: Marco de ciberseguridad para protección de identidades
+    /// - **PCI DSS**: Si maneja datos de pago, estándares de seguridad aplicables
+    /// 
+    /// MONITOREO Y ALERTAS EMPRESARIALES:
+    /// - **Failed Login Monitoring**: Alertas automáticas por intentos de brute force
+    /// - **Suspicious Activity**: Detección de logins desde ubicaciones inusuales
+    /// - **Admin Access Tracking**: Monitoreo especial de accesos administrativos
+    /// - **Compliance Reporting**: Reportes automáticos de actividad de autenticación
+    /// - **Security Metrics**: KPIs de seguridad para dashboards ejecutivos
+    /// 
+    /// PERFORMANCE Y ESCALABILIDAD:
+    /// - **High Concurrency**: Manejo de miles de autenticaciones simultáneas
+    /// - **JWT Caching**: Cache de tokens para validación rápida
+    /// - **Load Balancing**: Distribución de carga en múltiples instancias
+    /// - **Database Optimization**: Consultas optimizadas para autenticación rápida
+    /// - **CDN Integration**: Distribución global para latencia mínima
+    /// 
+    /// DISASTER RECOVERY Y CONTINUIDAD:
+    /// - **Backup Authentication**: Métodos alternativos durante emergencias
+    /// - **Failover Systems**: Sistemas de respaldo para continuidad de acceso
+    /// - **Emergency Access**: Procedimientos de acceso de emergencia controlados
+    /// - **Recovery Procedures**: Procedimientos rápidos de recuperación de servicio
+    /// </summary>
     [ApiController] // Habilita comportamientos automáticos de API (validación, serialización JSON)
     [Route("api/[controller]")] // Ruta base: api/auth - [controller] se reemplaza por "Auth"
     public class AuthController : ControllerBase

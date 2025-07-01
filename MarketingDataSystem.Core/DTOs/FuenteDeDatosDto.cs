@@ -12,6 +12,8 @@ namespace MarketingDataSystem.Core.DTOs
         public string Formato { get; set; } = string.Empty; // Formato de los datos (ej: JSON, CSV)
         public string Descripcion { get; set; } = string.Empty;
         public string Url { get; set; } = string.Empty;
+        public string Configuracion { get; set; } = string.Empty;
+        public bool Activa { get; set; } = true;
         // Puedes agregar más propiedades según el dominio
     }
 } 

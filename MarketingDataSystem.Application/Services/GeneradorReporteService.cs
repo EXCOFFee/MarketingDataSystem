@@ -1,72 +1,126 @@
+// ==================== SERVICIO GENERADOR DE REPORTES EXCEL PROFESIONALES ====================
+// Este servicio genera reportes Excel ejecutivos multi-hoja con formateo avanzado
+// CAPA: Application - Orquesta generación de análisis de negocio y reportes gerenciales
+// PATRÓN: Service Pattern + Event-Driven - responde a eventos del pipeline ETL
+// SOLID: Cumple S (generación de reportes), D (inversión dependencias)
+// INTEGRACIÓN: Suscriptor del EventBus para evento 'CargaFinalizada' (automático)
+// TECNOLOGÍA: ClosedXML para generación avanzada de Excel con formato profesional
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ClosedXML.Excel;
+using ClosedXML.Excel; // Biblioteca para generación avanzada de Excel
 using MarketingDataSystem.Application.Interfaces;
 using MarketingDataSystem.Core.Interfaces;
 
 namespace MarketingDataSystem.Application.Services
 {
     /// <summary>
-    /// Servicio de generación de reportes Excel.
-    /// Cumple con S y D de SOLID, patrón Service.
-    /// Es suscriptor del EventBus para el evento 'CargaFinalizada'.
+    /// Servicio especializado en generación de reportes Excel ejecutivos multi-hoja
+    /// RESPONSABILIDAD: Crear reportes de negocio profesionales con análisis completo
+    /// ARQUITECTURA: Capa Application - transforma datos de negocio en reportes ejecutivos
+    /// PATRÓN: Service Pattern + Event-Driven Architecture (suscriptor de EventBus)
+    /// SOLID:
+    /// - S: Una sola responsabilidad (generación de reportes Excel ejecutivos)
+    /// - D: Depende de abstracción ILoggerService para logging independiente
+    /// TECNOLOGÍA: ClosedXML para generación Excel avanzada con formateo profesional
+    /// AUTOMATIZACIÓN: Se ejecuta automáticamente cuando EventBus emite 'CargaFinalizada'
+    /// FORMATO: Genera múltiples hojas (Ventas, Clientes, Stock, Resumen Ejecutivo)
+    /// PROFESIONAL: Incluye colores condicionales, formateo monetario y métricas KPI
+    /// PERSISTENCIA: Guarda archivos físicos y registra metadata en base de datos
     /// </summary>
     public class GeneradorReporteService : IGeneradorReporteService
     {
-        private readonly ILoggerService _logger;
+        // ========== DEPENDENCIAS PARA GENERACIÓN DE REPORTES ==========
+        private readonly ILoggerService _logger; // Logger para trazabilidad de generación
 
+        /// <summary>
+        /// Constructor con inyección de dependencias para generación de reportes
+        /// PATRÓN: Dependency Injection - facilita testing y flexibilidad
+        /// TESTABILIDAD: Permite mocking del logger para pruebas unitarias
+        /// SOLID: Principio D - depende de abstracción ILoggerService
+        /// LOGGING: Utiliza logger para trazabilidad completa del proceso
+        /// </summary>
+        /// <param name="logger">Servicio de logging para trazabilidad de reportes</param>
         public GeneradorReporteService(ILoggerService logger)
         {
-            _logger = logger;
+            _logger = logger; // Inyección de dependencia del logger
         }
 
+        /// <summary>
+        /// Genera un reporte Excel ejecutivo completo con múltiples hojas de análisis
+        /// LÓGICA: Crear workbook → Generar hojas → Formatear → Guardar → Registrar
+        /// AUTOMATIZACIÓN: Método invocado automáticamente por EventBus tras 'CargaFinalizada'
+        /// FORMATO: 4 hojas profesionales (Ventas, Clientes, Stock, Resumen Ejecutivo)
+        /// ARCHIVO: Genera archivo físico con timestamp único para evitar colisiones
+        /// PERSISTENCIA: Guarda en directorio 'reportes' y registra metadata en BD
+        /// PROFESIONAL: Formateo avanzado con colores, moneda, totales y métricas KPI
+        /// ERROR HANDLING: Manejo robusto de errores con logging completo
+        /// </summary>
         public void GenerarReporte()
         {
             try
             {
-                _logger.LogInfo("Iniciando generación de reporte Excel");
+                // ========== INICIO DEL PROCESO DE GENERACIÓN ==========
+                _logger.LogInfo("Iniciando generación de reporte Excel ejecutivo");
                 
+                // ========== PREPARACIÓN DE NOMBRES Y RUTAS ==========
                 var fechaReporte = DateTime.Now;
-                var nombreArchivo = $"ReporteVentas_{fechaReporte:yyyy-MM-dd_HHmm}.xlsx";
+                var nombreArchivo = $"ReporteVentas_{fechaReporte:yyyy-MM-dd_HHmm}.xlsx"; // Timestamp único
                 var rutaCompleta = Path.Combine("reportes", nombreArchivo);
                 
-                // Crear directorio si no existe
-                Directory.CreateDirectory("reportes");
+                // ========== CREAR ESTRUCTURA DE DIRECTORIOS ==========
+                Directory.CreateDirectory("reportes"); // Crear directorio si no existe
                 
-                using var workbook = new XLWorkbook();
+                // ========== CREAR WORKBOOK EXCEL PROFESIONAL ==========
+                using var workbook = new XLWorkbook(); // IDisposable para liberación automática
                 
-                // Crear hojas del reporte
-                CrearHojaVentas(workbook, fechaReporte);
-                CrearHojaClientes(workbook);
-                CrearHojaStock(workbook);
-                CrearHojaResumen(workbook, fechaReporte);
+                // ========== GENERAR HOJAS EJECUTIVAS ESPECIALIZADAS ==========
+                CrearHojaVentas(workbook, fechaReporte);    // Hoja 1: Detalle de ventas del día
+                CrearHojaClientes(workbook);                // Hoja 2: Análisis de clientes
+                CrearHojaStock(workbook);                   // Hoja 3: Estado de inventario
+                CrearHojaResumen(workbook, fechaReporte);   // Hoja 4: Resumen ejecutivo con KPIs
                 
-                // Guardar archivo
-                workbook.SaveAs(rutaCompleta);
+                // ========== PERSISTENCIA DEL ARCHIVO FÍSICO ==========
+                workbook.SaveAs(rutaCompleta); // Guardar Excel con formato avanzado
                 
+                // ========== REGISTRO EN BASE DE DATOS (PENDIENTE) ==========
                 // TODO: Registrar en base de datos cuando UnitOfWork esté disponible
                 // _ = RegistrarReporteEnBaseDatos(nombreArchivo, rutaCompleta);
                 
-                _logger.LogInfo($"Reporte generado exitosamente: {rutaCompleta}");
+                // ========== CONFIRMACIÓN EXITOSA ==========
+                _logger.LogInfo($"Reporte Excel ejecutivo generado exitosamente: {rutaCompleta}");
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error generando reporte: {ex.Message}");
-                throw;
+                // ========== MANEJO ROBUSTO DE ERRORES ==========
+                _logger.LogError($"Error crítico generando reporte Excel: {ex.Message}");
+                throw; // Re-lanzar para manejo en capa superior
             }
         }
 
+        /// <summary>
+        /// Crea la hoja de análisis detallado de ventas diarias con formateo profesional
+        /// PROPÓSITO: Hoja principal con transacciones detalladas y totales financieros
+        /// FORMATO: Headers ejecutivos, tabla con datos, formateo monetario y totales
+        /// DATOS: En producción obtendría datos reales de VentaService vía UnitOfWork
+        /// FINANCIERO: Incluye cálculos automáticos de totales y formato de moneda
+        /// PROFESIONAL: Colores corporativos, bordes, negrita y autoajuste de columnas
+        /// </summary>
+        /// <param name="workbook">Workbook Excel donde crear la hoja</param>
+        /// <param name="fechaReporte">Fecha del reporte para filtros temporales</param>
         private void CrearHojaVentas(XLWorkbook workbook, DateTime fechaReporte)
         {
+            // ========== CREAR HOJA CON NOMBRE DESCRIPTIVO ==========
             var worksheet = workbook.Worksheets.Add("Ventas del Día");
             
-            // Encabezados
+            // ========== ENCABEZADO PRINCIPAL EJECUTIVO ==========
             worksheet.Cell(1, 1).Value = "REPORTE DE VENTAS";
             worksheet.Cell(1, 1).Style.Font.Bold = true;
-            worksheet.Cell(1, 1).Style.Font.FontSize = 16;
+            worksheet.Cell(1, 1).Style.Font.FontSize = 16; // Tamaño ejecutivo
             
+            // ========== FECHA DEL REPORTE ==========
             worksheet.Cell(2, 1).Value = $"Fecha: {fechaReporte:dd/MM/yyyy}";
             worksheet.Cell(2, 1).Style.Font.Bold = true;
             
