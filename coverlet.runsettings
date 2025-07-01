@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <!-- Configuración de cobertura para MarketingDataSystem -->
+          <Format>opencover,cobertura,json,teamcity</Format>
+          
+          <!-- Incluir todos los assemblies del proyecto -->
+          <Include>
+            [MarketingDataSystem.Application]*
+            [MarketingDataSystem.Core]*
+            [MarketingDataSystem.Infrastructure]*
+            [MarketingDataSystem.API]*
+          </Include>
+          
+          <!-- Excluir archivos generados y no relevantes -->
+          <Exclude>
+            [*.Tests]*
+            [*]*.Program
+            [*]*.Startup
+            [*]*Migrations*
+            [*]*Extensions*
+            [*]*ModelSnapshot*
+            [*]*Designer*
+          </Exclude>
+          
+          <!-- Excluir atributos y tipos específicos -->
+          <ExcludeByAttribute>
+            Obsolete
+            GeneratedCodeAttribute
+            CompilerGeneratedAttribute
+            ExcludeFromCodeCoverageAttribute
+          </ExcludeByAttribute>
+          
+          <!-- Excluir archivos específicos por patrón -->
+          <ExcludeByFile>
+            **/Migrations/**/*.cs
+            **/obj/**/*.cs
+            **/bin/**/*.cs
+            **/*Designer.cs
+            **/*.g.cs
+            **/*.g.i.cs
+          </ExcludeByFile>
+          
+          <!-- Configurar thresholds de cobertura mínima -->
+          <Threshold>95</Threshold>
+          <ThresholdType>line,branch,method</ThresholdType>
+          <ThresholdStat>minimum</ThresholdStat>
+          
+          <!-- Configuraciones adicionales de cobertura -->
+          <UseSourceLink>true</UseSourceLink>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+          <SkipAutoProps>true</SkipAutoProps>
+          <SingleHit>false</SingleHit>
+          <MergeWith>./coverage.json</MergeWith>
+          
+          <!-- Configuración específica por módulo -->
+          <ModulePathFilters>
+            <Exclude>
+              <Filter>\.Tests\.dll$</Filter>
+              <Filter>\.Test\.dll$</Filter>
+            </Exclude>
+          </ModulePathFilters>
+          
+          <!-- Configuración de reportes -->
+          <DoesNotReturnAttribute>DoesNotReturnAttribute</DoesNotReturnAttribute>
+          
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+  
+  <!-- Configuración de test runners -->
+  <TestRunParameters>
+    <Parameter name="CoverageThreshold" value="95" />
+    <Parameter name="ReportFormats" value="Html,HtmlSummary,Badges,TextSummary,Xml,Cobertura" />
+  </TestRunParameters>
+  
+  <!-- Configuración de logging para tests -->
+  <LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="console" enabled="true">
+        <Configuration>
+          <Verbosity>normal</Verbosity>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="trx" enabled="true">
+        <Configuration>
+          <LogFileName>testresults.trx</LogFileName>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
+  
+  <!-- Configuración específica de MSTest si se usa -->
+  <MSTest>
+    <Parallelize>
+      <Workers>4</Workers>
+      <Scope>method</Scope>
+    </Parallelize>
+    <AssemblyResolution>
+      <Directory path="%USERPROFILE%\.nuget\packages\" includeSubDirectories="true" />
+    </AssemblyResolution>
+  </MSTest>
+  
+</RunSettings> 
